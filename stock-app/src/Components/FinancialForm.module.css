@@ -1,18 +1,19 @@
 .formContainer {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #f2f2f2;
-  border: 1px solid #ddd;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+    max-width: 500px;
+    margin: 37px auto;
+    padding: 96px;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 11px;
 }
 
 .title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
+  font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 45px;
+    color: #333;
+    margin-top: -38px;
 }
 
 .inputGroup {
@@ -35,7 +36,7 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #e0ffe0;
+  background-color: #fff;
 }
 
 .inputField:focus {
@@ -44,16 +45,20 @@
 }
 
 .submitButton {
-  width: 100%;
-  height: 40px;
-  padding: 10px;
-  background-image: linear-gradient(to bottom, #4CAF50, #388E3C);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+    width: 104%;
+    height: 49px;
+    padding: 11px;
+    background-image: linear-gradient(to bottom, #4CAF50, #388E3C);
+    color: #fff;
+    border: none;
+    border-radius: 13px;
+    cursor: pointer;
+    margin-top: 25px;
 }
 
 .submitButton:hover {
   background-image: linear-gradient(to bottom, #5CB860, #388E3C); /* Lighter green hover */
+}
+.loader{
+  margin-left: 50rem;
 }

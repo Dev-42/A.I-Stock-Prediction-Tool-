@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import styles from "./FinancialForm.module.css";
+import axios from "axios";
+import { ScaleLoader } from "react-spinners";
 
-const FinancialForm = () => {
+const API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
+console.log(API_KEY);
+
+const FinancialForm = ({ setResult }) => {
   const [values, setValues] = useState({
     marketPrice: "",
     EPS: "",
@@ -15,9 +20,94 @@ const FinancialForm = () => {
     netIncome: "",
   });
 
-  const handleSubmit = (e) => {
+  const [isSent, setIsSent] = useState(true);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(values);
+
+    const trainingPrompt = [
+      {
+        parts: [
+          {
+            text: "From the next prompt I am gonna send you some parameters for predicting stock market share,tell me it is overvalued or undervalued and I should buy it or not",
+          },
+        ],
+        role: "user",
+      },
+      {
+        role: "model",
+        parts: [
+          {
+            text: "okay",
+          },
+        ],
+      },
+      {
+        role: "user",
+        parts: [
+          {
+            text: "and also calculate - P/E ratio , P/B ratio,P/S ratio, Dividend Yeild , Earnings Growth in % , Debt-to-Equity ratio, ROE % and give as a response",
+          },
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {
+            text: "okay",
+          },
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {
+            text: "always give response in form of HTML div and table tag",
+          },
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {
+            text: "okay",
+          },
+        ],
+      },
+    ];
+
+    let url =
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyBsGVUv7DBPrZwqbfd_ccN19UGjajusxEA";
+
+    let messagesToSend = [
+      ...trainingPrompt,
+      {
+        role: "user",
+        parts: [
+          {
+            text: JSON.stringify(values),
+          },
+        ],
+      },
+    ];
+
+    setIsSent(false);
+    let res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        contents: messagesToSend,
+      }),
+    });
+    let resJSON = await res.json();
+    setIsSent(true);
+    console.log(resJSON);
+    let resMessage = resJSON.candidates[0].content.parts[0].text;
+    console.log(resMessage);
+    setResult(resMessage);
   };
 
   const handleChange = (e) => {
@@ -128,9 +218,13 @@ const FinancialForm = () => {
           className={styles.inputField}
         />
       </div>
-      <button type="submit" className={styles.submitButton}>
-        Submit
-      </button>
+      {isSent ? (
+        <button type="submit" className={styles.submitButton}>
+          Submit
+        </button>
+      ) : (
+        <ScaleLoader />
+      )}
     </form>
   );
 };
