@@ -8,16 +8,18 @@ console.log(API_KEY);
 
 const FinancialForm = ({ setResult }) => {
   const [values, setValues] = useState({
-    marketPrice: "",
+    marketCap: "",
     EPS: "",
     bookValue: "",
-    sales: "",
-    annualDividends: "",
-    previousEPS: "",
-    currentEPS: "",
-    totalDebt: "",
-    totalEquity: "",
-    netIncome: "",
+    ROCE: "",
+    OPM5Year: "",
+    ROE: "",
+    IntCoverage: "",
+    DebttoEquityRatio: "",
+    StockPE: "",
+    PreviousYearEPS: "",
+    CurrentYearEPS: "",
+    DividendYeild: "",
   });
 
   const [isSent, setIsSent] = useState(true);
@@ -30,7 +32,7 @@ const FinancialForm = ({ setResult }) => {
       {
         parts: [
           {
-            text: "From the next prompt I am gonna send you some parameters for predicting stock market share,tell me it is overvalued or undervalued and I should buy it or not",
+            text: "From the next prompt I am gonna send you some parameters for predicting shares in  stock market for long term of 5 years,tell me whether it is overvalued,undervalued or fairly valued and I should buy it or not.Make the color of overvalued as red,undervalued as green and fairly valued as also green",
           },
         ],
         role: "user",
@@ -119,23 +121,25 @@ const FinancialForm = ({ setResult }) => {
     <form action="" className={styles.formContainer} onSubmit={handleSubmit}>
       <h2 className={styles.title}>Financial Form</h2>
       <div className={styles.inputGroup}>
-        <label>Market Price Per Share:</label>
+        <label>Market Capitalization Per Share:</label>
         <input
           type="number"
-          name="marketPrice"
-          value={values.marketPrice}
+          name="marketCap"
+          value={values.marketCap}
           onChange={handleChange}
           className={styles.inputField}
+          required
         />
       </div>
       <div className={styles.inputGroup}>
-        <label>EPS Per Share:</label>
+        <label>Stock P/E Per Share:</label>
         <input
           type="number"
-          name="EPS"
-          value={values.EPS}
+          name="StockPE"
+          value={values.StockPE}
           onChange={handleChange}
           className={styles.inputField}
+          required
         />
       </div>
       <div className={styles.inputGroup}>
@@ -146,74 +150,103 @@ const FinancialForm = ({ setResult }) => {
           value={values.bookValue}
           onChange={handleChange}
           className={styles.inputField}
+          required
         />
       </div>
       <div className={styles.inputGroup}>
-        <label>Sales Per Share:</label>
+        <label>ROCE Per Share:</label>
         <input
           type="number"
-          name="sales"
-          value={values.sales}
+          name="ROCE"
+          value={values.ROCE}
           onChange={handleChange}
           className={styles.inputField}
+          required
         />
       </div>
       <div className={styles.inputGroup}>
-        <label>Annual Dividents Per Share:</label>
+        <label>Operating Profit Margin(OPM) of 5 Years Per Share:</label>
         <input
           type="number"
-          name="annualDividends"
-          value={values.annualDividends}
+          name="OPM5Year"
+          value={values.OPM5Year}
           onChange={handleChange}
           className={styles.inputField}
+          required
         />
       </div>
       <div className={styles.inputGroup}>
-        <label>Previous EPS Per Share:</label>
+        <label>Return On Equity(ROE) Per Share:</label>
         <input
           type="number"
-          name="previousEPS"
-          value={values.previousEPS}
+          name="ROE"
+          value={values.ROE}
           onChange={handleChange}
           className={styles.inputField}
+          required
         />
       </div>
       <div className={styles.inputGroup}>
-        <label>Current EPS Per Share:</label>
+        <label>Interest Coverage Ratio Per Share:</label>
         <input
           type="number"
-          name="currentEPS"
-          value={values.currentEPS}
+          name="IntCoverage"
+          value={values.IntCoverage}
           onChange={handleChange}
           className={styles.inputField}
+          required
         />
       </div>
       <div className={styles.inputGroup}>
-        <label>Total Debt Per Share:</label>
+        <label>Debt to Equity Ratio Per Share:</label>
         <input
           type="number"
-          name="totalDebt"
-          value={values.totalDebt}
+          name="DebttoEquityRatio"
+          value={values.DebttoEquityRatio}
           onChange={handleChange}
           className={styles.inputField}
+          required
         />
       </div>
       <div className={styles.inputGroup}>
-        <label>Total Equity Per Share:</label>
+        <label>EPS Per Share:</label>
         <input
           type="number"
-          name="totalEquity"
-          value={values.totalEquity}
+          name="EPS"
+          value={values.EPS}
           onChange={handleChange}
           className={styles.inputField}
+          required
         />
       </div>
       <div className={styles.inputGroup}>
-        <label>Net Income Per Share:</label>
+        <label>Previous Year EPS Per Share:</label>
         <input
           type="number"
-          name="netIncome"
-          value={values.netIncome}
+          name="PreviousYearEPS"
+          value={values.PreviousYearEPS}
+          onChange={handleChange}
+          className={styles.inputField}
+          required
+        />
+      </div>
+      <div className={styles.inputGroup}>
+        <label>Current Year EPS Per Share:</label>
+        <input
+          type="number"
+          name="CurrentYearEPS"
+          value={values.CurrentYearEPS}
+          onChange={handleChange}
+          className={styles.inputField}
+          required
+        />
+      </div>
+      <div className={styles.inputGroup}>
+        <label>Dividend Yeild in % Per Share:</label>
+        <input
+          type="number"
+          name="DividendYeild"
+          value={values.DividendYeild}
           onChange={handleChange}
           className={styles.inputField}
         />
