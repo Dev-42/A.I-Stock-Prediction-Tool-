@@ -40,3 +40,11 @@ npm install
 ### Start the application
 npm start
 ## Usage 
+
+
+## Usage
+-----------
+1)Input the financial metrics: Input the financial metrics for the stock you want to predict.
+2)Submit the request: Click the "Submit" button to send the request to the Gemini API.
+3)Wait for the API request: Wait for the API request to be processed (indicated by a loading animation).
+3)View the prediction results: View the prediction results displayed on the page.
